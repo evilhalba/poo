@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.pootrab.models.Situacao;
 
 public interface SituacaoRepository extends CrudRepository<Situacao,String>{
-
+	Situacao findBySituacaoid(String situacaoid);
 }

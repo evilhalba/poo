@@ -61,15 +61,29 @@ public class PessoaController {
 	
 	
 	@RequestMapping(value="/detalhesPessoa/{idPessoa}", method=RequestMethod.GET)
-	public ModelAndView deltalhesPessoaGET(){
+	public ModelAndView deltalhesPessoaGET(@PathVariable("idPessoa") int idPessoa){
+		ModelAndView mv = new ModelAndView("pessoa/detalhes");
+		Pessoa pessoa = pr.findByIdPessoa(idPessoa);
+		mv.addObject("pessoa", pessoa);
 		
-		
-		
+		return mv;
 	}
 	
 	@RequestMapping(value="/detalhesPessoa/{idPessoa}", method=RequestMethod.POST)
-	public ModelAndView deltalhesPessoaPOST(){
-		
+	public ModelAndView deltalhesPessoaPOST(@PathVariable("idPessoa") int idPessoa ,@Valid Pessoa pessoa,BindingResult result, RedirectAttributes attributes){
+		ModelAndView mv = new ModelAndView();
+		if(result.hasErrors()) {
+			attributes.addFlashAttribute("mensagem", "Dados incorretos ou incompletos, favor revisar!");
+			mv.setViewName("redirect:/detalhesPessoa/"+idPessoa);
+			return mv;
+		}else {
+			pessoa.setIdPessoa(idPessoa);
+			pr.save(pessoa);
+			
+			attributes.addFlashAttribute("mensagem", "Alterações salvas!");
+			mv.setViewName("redirect:/detalhesPessoa/"+idPessoa);
+			return mv;
+		}
 		
 		
 	}

@@ -57,7 +57,7 @@ public class MarcaVeiculoController {
 		MarcaVeiculo marcaVeiculo = mvr.findByMarcaveiculoid(marcaveiculoid);
 		mvr.delete(marcaVeiculo);
 		attributes.addFlashAttribute("mensagem" , "Marca de Veiculo deletada com sucesso!");
-		return "redirect:/listaMarcasVeiculos";
+		return "redirect:/listarMarcasVeiculos";
 	}
 	
 }

@@ -22,20 +22,25 @@ public class ModeloVeiculoController {
 	@Autowired
 	private ModeloVeiculoRepository mvr;
 	
-	
+	@Autowired
+	private MarcaVeiculoRepository marcvr;
 	
 	@RequestMapping(value="/cadastrarModeloVeiculo", method=RequestMethod.GET)
-	public String cadastrarModeloVeiculoGET() {
+	public ModelAndView cadastrarModeloVeiculoGET() {
+		ModelAndView mv = new ModelAndView("modeloveiculo/cadastrar");
+		Iterable<MarcaVeiculo> marcas = marcvr.findAll();
+		mv.addObject("marcas", marcas);
 		
-		return "modeloveiculo/cadastrar";
+		return mv;
 	}
 	
 	@RequestMapping(value="/cadastrarModeloVeiculo", method=RequestMethod.POST)
-	public String cadastrarModeloVeiculoPOST(@Valid ModeloVeiculo modeloveiculo,  BindingResult result, RedirectAttributes attributes) {
+	public String cadastrarModeloVeiculoPOST(@Valid ModeloVeiculo modeloveiculo, MarcaVeiculo marcaveiculo, BindingResult result, RedirectAttributes attributes) {
 		if(result.hasErrors()) {
 			attributes.addFlashAttribute("mensagem", "Dados incorretos ou incompletos, favor revisar!");
 			return "redirect:/cadastrarModeloVeiculo";
 		}else {
+			modeloveiculo.setMarcaveiculo(marcaveiculo);
 			mvr.save(modeloveiculo);
 			attributes.addFlashAttribute("mensagem", "Modelo de Veiculo cadastrada com sucesso!");
 			return "redirect:/listarModelosVeiculos";
@@ -59,6 +64,6 @@ public class ModeloVeiculoController {
 		ModeloVeiculo modeloVeiculo = mvr.findByModeloveiculoid(modeloveiculoid);
 		mvr.delete(modeloVeiculo);
 		attributes.addFlashAttribute("mensagem" , "Modelo de Veiculo deletada com sucesso!");
-		return "redirect:/listaModelosVeiculos";
+		return "redirect:/listarModelosVeiculos";
 	}
 }

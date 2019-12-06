@@ -7,4 +7,6 @@ import com.pootrab.models.Unidade;
 
 public interface UnidadeRepository extends CrudRepository<Unidade,Integer>{
 
+	
+	Unidade findById(int id);
 }
