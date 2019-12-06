@@ -12,7 +12,7 @@ public class Pessoa {
 	@Id
 	@NotNull
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private int id;
+	private int idPessoa;
 	@NotNull
 	private int tipo;
 	/*
@@ -31,11 +31,12 @@ public class Pessoa {
 	private String rasaoSocial;
 	
 	
-	public int getId() {
-		return id;
+	
+	public int getIdPessoa() {
+		return idPessoa;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setIdPessoa(int idPessoa) {
+		this.idPessoa = idPessoa;
 	}
 	public int getTipo() {
 		return tipo;

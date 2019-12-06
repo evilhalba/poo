@@ -16,43 +16,42 @@ public class ModeloVeiculo {
 	
 	@Id
 	@NotNull
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private int id;
+	private String modeloveiculoid;
 	
 	
-	private String nome;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="idMarcaVeiculo")
 	private MarcaVeiculo marcaveiculo;
 	
-	@OneToMany(mappedBy="modeloVeiculo")
+	@OneToMany(mappedBy="modeloveiculo")
 	private List<Veiculo> veiculos;
-	
-	
-	public int getId() {
-		return id;
+
+	public String getModeloveiculoid() {
+		return modeloveiculoid;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public void setModeloveiculoid(String modeloveiculoid) {
+		this.modeloveiculoid = modeloveiculoid;
 	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+
 	public MarcaVeiculo getMarcaveiculo() {
 		return marcaveiculo;
 	}
+
 	public void setMarcaveiculo(MarcaVeiculo marcaveiculo) {
 		this.marcaveiculo = marcaveiculo;
 	}
+
 	public List<Veiculo> getVeiculos() {
 		return veiculos;
 	}
+
 	public void setVeiculos(List<Veiculo> veiculos) {
 		this.veiculos = veiculos;
 	}
+	
+	
 	
 }

@@ -1,33 +1,46 @@
 package com.pootrab.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 @Entity
 public class TipoDeslocamento {
 	
 	@Id
 	@NotNull
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private int id;
-	@NotNull
-	private String descricao;
+	private String tipodeslocamentoid;
 	
 	
-	public int getId() {
-		return id;
+	@OneToMany(mappedBy="tipodeslocamento")
+	private List<Viagem> viagens;
+
+
+	public String getTipodeslocamentoid() {
+		return tipodeslocamentoid;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+
+	public void setTipodeslocamentoid(String tipodeslocamentoid) {
+		this.tipodeslocamentoid = tipodeslocamentoid;
 	}
-	public String getDescricao() {
-		return descricao;
+
+
+	public List<Viagem> getViagens() {
+		return viagens;
 	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+
+
+	public void setViagens(List<Viagem> viagens) {
+		this.viagens = viagens;
 	}
+	
+	
+	
 	
 	
 	

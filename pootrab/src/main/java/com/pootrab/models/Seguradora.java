@@ -20,6 +20,18 @@ public class Seguradora {
 	private int id;
 	private int nome;
 	private String endereco;
+	
+	@OneToMany(mappedBy="seguradora")
+	private List<Viagem> viagens;
+	
+	
+	
+	public List<Viagem> getViagens() {
+		return viagens;
+	}
+	public void setViagens(List<Viagem> viagens) {
+		this.viagens = viagens;
+	}
 	public int getId() {
 		return id;
 	}
